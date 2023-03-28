@@ -122,12 +122,12 @@ weights_22k = {
     'convnext_tiny_224': 'https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_tiny_22k_1k_224.h5',
     'convnext_tiny_384': 'https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_tiny_22k_1k_384.h5',
     'convnext_small_224': 'https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_small_22k_1k_224_ema.h5',
-    'convnext_small_224': 'https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_small_22k_1k_384_ema.h5',
+    'convnext_small_384': 'https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_small_22k_1k_384_ema.h5',
     'convnext_base_224': 'https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_base_22k_1k_224_ema.h5',
     'convnext_base_384': 'https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_base_22k_1k_384_ema.h5',
     'convnext_large_224': 'https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_large_22k_1k_224_ema.h5',
     'convnext_large_384': 'https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_large_22k_1k_384_ema.h5',    
-    'convnext_xlarge_384': 'https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_xlarge_22k_1k_224_ema.h5',   
+    'convnext_xlarge_224': 'https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_xlarge_22k_1k_224_ema.h5',   
     'convnext_xlarge_384': 'https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_xlarge_22k_1k_384_ema.h5'
 }
 
