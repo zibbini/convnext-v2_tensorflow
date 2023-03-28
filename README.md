@@ -9,9 +9,9 @@ This repo contains unofficial implementations of both versions of ConvNeXt model
 
 - Can accept custom input shapes and input tensors
 - Capable of mixed precision use
-- Model configurations (atto, femto, pico, nano) for ConvNeXt-V1 matching those found in the official [pytorch-image-models](https://github.com/huggingface/pytorch-image-models) library. 
+- Model configurations (`atto`, `femto`, `pico`, `nano`) for ConvNeXt-V1 matching those found in the official [pytorch-image-models](https://github.com/huggingface/pytorch-image-models) library. 
 
-Weights are currently available for ConvNeXt V1 official configurations, but ConvNeXt V2 weights are still yet to be processed. The atto, femto, pico and nano configurations of ConvNeXt V1 are also in processing. 
+Weights are currently available for ConvNeXt V1 official configurations, but ConvNeXt V2 weights are still yet to be processed. The `atto`, `femto`, `pico` and `nano` configurations of ConvNeXt V1 are also in processing. 
 
 ### Usage
 
@@ -92,9 +92,9 @@ These are comparison results between PyTorch and TensorFlow implementations from
 | ConvNeXt-S | 224x224 | 84.6 | 84.1 | 50M | 8.7G | [model](https://dl.fbaipublicfiles.com/convnext/convnext_small_22k_1k_224.pth)
 | ConvNeXt-S | 384x384 | 85.8 | 85.8 | 50M | 25.5G | [model](https://dl.fbaipublicfiles.com/convnext/convnext_small_22k_1k_384.pth)
 | ConvNeXt-B | 224x224 | 85.8 | 85.4 | 89M | 15.4G | [model](https://dl.fbaipublicfiles.com/convnext/convnext_base_22k_1k_224.pth)
-| ConvNeXt-B | 384x384 | 86.8 | 89M | 47.0G | [model](https://dl.fbaipublicfiles.com/convnext/convnext_base_22k_1k_384.pth)
+| ConvNeXt-B | 384x384 | 86.8 | 86.8 | 89M | 47.0G | [model](https://dl.fbaipublicfiles.com/convnext/convnext_base_22k_1k_384.pth)
 | ConvNeXt-L | 224x224 | 86.6 | 86.4 | 198M | 34.4G | [model](https://dl.fbaipublicfiles.com/convnext/convnext_large_22k_1k_224.pth)
-| ConvNeXt-L | 384x384 | 87.5 | 198M | 101.0G | [model](https://dl.fbaipublicfiles.com/convnext/convnext_large_22k_1k_384.pth)
+| ConvNeXt-L | 384x384 | 87.5 | 87.5 | 198M | 101.0G | [model](https://dl.fbaipublicfiles.com/convnext/convnext_large_22k_1k_384.pth)
 | ConvNeXt-XL | 224x224 | 87.0 | 86.8 | 350M | 60.9G | [model](https://dl.fbaipublicfiles.com/convnext/convnext_xlarge_22k_1k_224_ema.pth)
 | ConvNeXt-XL | 384x384 | 87.8 | 87.7 | 350M | 179.0G | [model](https://dl.fbaipublicfiles.com/convnext/convnext_xlarge_22k_1k_384_ema.pth)
 
