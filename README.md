@@ -46,7 +46,8 @@ model = convnext_v1.convnext_tiny(input_shape=(512, 512, 3))
 # Use imagenet weights to load model
 from convnext_tf import convnext_v1
 
-model = convnext_v1.convnext_tiny(weights='imagenet')
+model = convnext_v1.convnext_tiny(weights='imagenet_1k') # Load weights trained on ImageNet-1k dataset
+model = convnext_v1.convnext_tiny(weights='imagenet_22k') # Load weights trained on ImageNet-22k dataset and fine-tuned on ImageNet-1k dataset
 ```
 
 ``` py
@@ -76,27 +77,27 @@ These are comparison results between PyTorch and TensorFlow implementations from
 
 | name | resolution | PyTorch acc@1 | TensorFlow acc@1 | #params | FLOPs | model |
 |:---:|:---:|:---:|:---:| :---:|:---:|:---:|
-| ConvNeXt-T | 224x224 | 82.1 | 81.3 | 28M | 4.5G | [model](https://dl.fbaipublicfiles.com/convnext/convnext_tiny_1k_224_ema.pth) |
-| ConvNeXt-S | 224x224 | 83.1 | 82.4 | 50M | 8.7G | [model](https://dl.fbaipublicfiles.com/convnext/convnext_small_1k_224_ema.pth) |
-| ConvNeXt-B | 224x224 | 83.8 | 83.3 | 89M | 15.4G | [model](https://dl.fbaipublicfiles.com/convnext/convnext_base_1k_224_ema.pth) |
-| ConvNeXt-B | 384x384 | 85.1 | 84.9 | 89M | 45.0G | [model](https://dl.fbaipublicfiles.com/convnext/convnext_base_1k_384.pth) |
-| ConvNeXt-L | 224x224 | 84.3 | 83.9 | 198M | 34.4G | [model](https://dl.fbaipublicfiles.com/convnext/convnext_large_1k_224_ema.pth) |
-| ConvNeXt-L | 384x384 | 85.5 | 85.4 | 198M | 101.0G | [model](https://dl.fbaipublicfiles.com/convnext/convnext_large_1k_384.pth) |
+| ConvNeXt-T | 224x224 | 82.1 | 81.3 | 28M | 4.5G | [model](https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_tiny_1k_224_ema.h5) |
+| ConvNeXt-S | 224x224 | 83.1 | 82.4 | 50M | 8.7G | [model](https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_small_1k_224_ema.h5) |
+| ConvNeXt-B | 224x224 | 83.8 | 83.3 | 89M | 15.4G | [model](https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_base_1k_224_ema.h5) |
+| ConvNeXt-B | 384x384 | 85.1 | 84.9 | 89M | 45.0G | [model](https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_base_1k_384_ema.h5) |
+| ConvNeXt-L | 224x224 | 84.3 | 83.9 | 198M | 34.4G | [model](https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_large_1k_224_ema.h5) |
+| ConvNeXt-L | 384x384 | 85.5 | 85.4 | 198M | 101.0G | [model](https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_large_1k_384_ema.h5) |
 
 ##### ImageNet-22K trained models
 
 | name | resolution | PyTorch acc@1 | TensorFlow acc@1 | #params | FLOPs | model |
 |:---:|:---:|:---:|:---:| :---:| :---:|:---:|
-| ConvNeXt-T | 224x224 | 82.9 | 82.3 | 29M | 4.5G | [model](https://dl.fbaipublicfiles.com/convnext/convnext_tiny_22k_1k_224.pth)
-| ConvNeXt-T | 384x384 | 84.1 | 84.0 | 29M | 13.1G | [model](https://dl.fbaipublicfiles.com/convnext/convnext_tiny_22k_1k_384.pth)
-| ConvNeXt-S | 224x224 | 84.6 | 84.1 | 50M | 8.7G | [model](https://dl.fbaipublicfiles.com/convnext/convnext_small_22k_1k_224.pth)
-| ConvNeXt-S | 384x384 | 85.8 | 85.8 | 50M | 25.5G | [model](https://dl.fbaipublicfiles.com/convnext/convnext_small_22k_1k_384.pth)
-| ConvNeXt-B | 224x224 | 85.8 | 85.4 | 89M | 15.4G | [model](https://dl.fbaipublicfiles.com/convnext/convnext_base_22k_1k_224.pth)
-| ConvNeXt-B | 384x384 | 86.8 | 86.8 | 89M | 47.0G | [model](https://dl.fbaipublicfiles.com/convnext/convnext_base_22k_1k_384.pth)
-| ConvNeXt-L | 224x224 | 86.6 | 86.4 | 198M | 34.4G | [model](https://dl.fbaipublicfiles.com/convnext/convnext_large_22k_1k_224.pth)
-| ConvNeXt-L | 384x384 | 87.5 | 87.5 | 198M | 101.0G | [model](https://dl.fbaipublicfiles.com/convnext/convnext_large_22k_1k_384.pth)
-| ConvNeXt-XL | 224x224 | 87.0 | 86.8 | 350M | 60.9G | [model](https://dl.fbaipublicfiles.com/convnext/convnext_xlarge_22k_1k_224_ema.pth)
-| ConvNeXt-XL | 384x384 | 87.8 | 87.7 | 350M | 179.0G | [model](https://dl.fbaipublicfiles.com/convnext/convnext_xlarge_22k_1k_384_ema.pth)
+| ConvNeXt-T | 224x224 | 82.9 | 82.3 | 29M | 4.5G | [model](https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_tiny_22k_1k_224.h5)
+| ConvNeXt-T | 384x384 | 84.1 | 84.0 | 29M | 13.1G | [model](https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_tiny_22k_1k_384.h5)
+| ConvNeXt-S | 224x224 | 84.6 | 84.1 | 50M | 8.7G | [model](https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_small_22k_1k_224_ema.h5)
+| ConvNeXt-S | 384x384 | 85.8 | 85.8 | 50M | 25.5G | [model](https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_small_22k_1k_384_ema.h5)
+| ConvNeXt-B | 224x224 | 85.8 | 85.4 | 89M | 15.4G | [model](https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_base_22k_1k_224_ema.h5)
+| ConvNeXt-B | 384x384 | 86.8 | 86.8 | 89M | 47.0G | [model](https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_base_22k_1k_384_ema.h5)
+| ConvNeXt-L | 224x224 | 86.6 | 86.4 | 198M | 34.4G | [model](https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_large_22k_1k_224_ema.h5)
+| ConvNeXt-L | 384x384 | 87.5 | 87.5 | 198M | 101.0G | [model](https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_large_22k_1k_384_ema.h5)
+| ConvNeXt-XL | 224x224 | 87.0 | 86.8 | 350M | 60.9G | [model](https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_xlarge_22k_1k_224_ema.h5)
+| ConvNeXt-XL | 384x384 | 87.8 | 87.7 | 350M | 179.0G | [model](https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_xlarge_22k_1k_384_ema.h5)
 
 ### Acknowledgements and References
 
