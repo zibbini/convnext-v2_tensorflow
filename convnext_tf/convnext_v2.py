@@ -11,13 +11,13 @@ class GRN(layers.Layer):
     def __init__(self, dim, **kwargs):
         super().__init__(**kwargs)
         self.gamma = tf.Variable(
-            initial_value=tf.zeros((1, 1, 1, dim)),
+            initial_value=tf.zeros((1, 1, 1, dim), dtype=self.compute_dtype),
             trainable=True,
             dtype=self.compute_dtype,
             name='GRN/gamma'
         )
         self.beta = tf.Variable(
-            initial_value=tf.zeros((1, 1, 1, dim)),
+            initial_value=tf.zeros((1, 1, 1, dim), dtype=self.compute_dtype),
             trainable=True,
             dtype=self.compute_dtype,
             name='GRN/beta'
