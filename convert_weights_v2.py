@@ -216,7 +216,6 @@ def main():
         tf_model.save_weights(f'weights/{save_name}')
         del tf_model
         keras.backend.clear_session()
-        break
 
 if __name__ == '__main__':
     main()
