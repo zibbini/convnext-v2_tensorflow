@@ -150,20 +150,20 @@ def convnext(
 
     return keras.Model(inputs, outputs, name=model_name)
 
-def convnextv2_atto(**kwargs):
-    model = convnext_v2(depths=[2, 2, 6, 2], dims=[40, 80, 160, 320], model_name='convnextv2_atto', **kwargs)
+def convnext_atto(**kwargs):
+    model = convnext(depths=[2, 2, 6, 2], dims=[40, 80, 160, 320], model_name='convnext_atto', **kwargs)
     return model
 
-def convnextv2_femto(**kwargs):
-    model = convnext_v2(depths=[2, 2, 6, 2], dims=[48, 96, 192, 384], model_name='convnextv2_femto', **kwargs)
+def convnext_femto(**kwargs):
+    model = convnext(depths=[2, 2, 6, 2], dims=[48, 96, 192, 384], model_name='convnext_femto', **kwargs)
     return model
 
-def convnextv2_pico(**kwargs):
-    model = convnext_v2(depths=[2, 2, 6, 2], dims=[64, 128, 256, 512], model_name='convnextv2_pico', **kwargs)
+def convnext_pico(**kwargs):
+    model = convnext(depths=[2, 2, 6, 2], dims=[64, 128, 256, 512], model_name='convnext_pico', **kwargs)
     return model
 
-def convnextv2_nano(**kwargs):
-    model = convnext_v2(depths=[2, 2, 8, 2], dims=[80, 160, 320, 640], model_name='convnextv2_nano', **kwargs)
+def convnext_nano(**kwargs):
+    model = convnext(depths=[2, 2, 8, 2], dims=[80, 160, 320, 640], model_name='convnext_nano', **kwargs)
     return model
 
 def convnext_tiny(**kwargs):
