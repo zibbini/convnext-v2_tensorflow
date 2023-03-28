@@ -5,11 +5,17 @@ The ConvNeXt family of models are a series of convolutional neural networks (Con
 - [A ConvNet for the 2020s](https://arxiv.org/abs/2201.03545)
 - [ConvNeXt V2: Co-designing and Scaling ConvNets with Masked Autoencoders](http://arxiv.org/abs/2301.00808)
 
-This repo contains unofficial implementations of both versions of ConvNeXt models in tensorflow. These are pretty much straight copies from the official PyTorch implementations ([ConvNeXt V1](https://github.com/facebookresearch/ConvNeXt) & (ConvNeXt V2)[https://github.com/facebookresearch/ConvNeXt-V2]) with minor changes to suit Keras' functional API. These implementations are capable of CPU or GPU use, and mixed-precision out of the box. Weights are currently available for ConvNeXt V1, but V2 weights are still yet to be processed. 
+This repo contains unofficial implementations of both versions of ConvNeXt models in tensorflow. These are pretty much straight copies from the official PyTorch implementations ([ConvNeXt V1](https://github.com/facebookresearch/ConvNeXt) & [ConvNeXt V2](https://github.com/facebookresearch/ConvNeXt-V2) with minor changes to suit Keras' functional API. Of note, these implementations are:
+
+- Can accept custom input shapes and input tensors
+- Capable of mixed precision use
+- Model configurations (atto, femto, pico, nano) for ConvNeXt-V1 matching those found in the official [pytorch-image-models](https://github.com/huggingface/pytorch-image-models) library. 
+
+Weights are currently available for ConvNeXt V1 official configurations, but ConvNeXt V2 weights are still yet to be processed. The atto, femto, pico and nano configurations of ConvNeXt V1 are also in processing. 
 
 ### Usage
 
-For installation of tensorflow and keras, please refer to the following (guide)[https://www.tensorflow.org/install]. Once TensorFlow is installed, you can make use of the models like so:
+For installation of tensorflow and keras, please refer to the following [guide](https://www.tensorflow.org/install). Once TensorFlow is installed, you can make use of the models like so:
 
 ``` py
 # Contruct 'tiny' model with standard ImageNet resolution

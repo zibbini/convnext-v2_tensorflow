@@ -150,6 +150,21 @@ def convnext(
 
     return keras.Model(inputs, outputs, name=model_name)
 
+def convnextv2_atto(**kwargs):
+    model = convnext_v2(depths=[2, 2, 6, 2], dims=[40, 80, 160, 320], model_name='convnextv2_atto', **kwargs)
+    return model
+
+def convnextv2_femto(**kwargs):
+    model = convnext_v2(depths=[2, 2, 6, 2], dims=[48, 96, 192, 384], model_name='convnextv2_femto', **kwargs)
+    return model
+
+def convnextv2_pico(**kwargs):
+    model = convnext_v2(depths=[2, 2, 6, 2], dims=[64, 128, 256, 512], model_name='convnextv2_pico', **kwargs)
+    return model
+
+def convnextv2_nano(**kwargs):
+    model = convnext_v2(depths=[2, 2, 8, 2], dims=[80, 160, 320, 640], model_name='convnextv2_nano', **kwargs)
+    return model
 
 def convnext_tiny(**kwargs):
     model = convnext(depths=[3, 3, 9, 3], dims=[96, 192, 384, 768], model_name='convnext_tiny', **kwargs)
