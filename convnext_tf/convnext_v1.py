@@ -109,6 +109,29 @@ class Head(keras.Model):
         return x
 
 
+weights_1k = {
+    'convnext_tiny_224': 'https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_tiny_1k_224_ema.h5',
+    'convnext_small_224': 'https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_small_1k_224_ema.h5',
+    'convnext_base_224': 'https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_base_1k_224_ema.h5',
+    'convnext_base_384': 'https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_base_1k_384_ema.h5',
+    'convnext_large_224': 'https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_large_1k_224_ema.h5',
+    'convnext_large_384': 'https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_large_1k_384_ema.h5'
+}
+
+weights_22k = {
+    'convnext_tiny_224': 'https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_tiny_22k_1k_224.h5',
+    'convnext_tiny_384': 'https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_tiny_22k_1k_384.h5',
+    'convnext_small_224': 'https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_small_22k_1k_224_ema.h5',
+    'convnext_small_224': 'https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_small_22k_1k_384_ema.h5',
+    'convnext_base_224': 'https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_base_22k_1k_224_ema.h5',
+    'convnext_base_384': 'https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_base_22k_1k_384_ema.h5',
+    'convnext_large_224': 'https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_large_22k_1k_224_ema.h5',
+    'convnext_large_384': 'https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_large_22k_1k_384_ema.h5',    
+    'convnext_xlarge_384': 'https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_xlarge_22k_1k_224_ema.h5',   
+    'convnext_xlarge_384': 'https://github.com/zibbini/convnext-v2_tensorflow/releases/download/v0.1/convnext_xlarge_22k_1k_384_ema.h5'
+}
+
+
 def convnext(
     input_shape=None,
     input_tensor=None, 
@@ -148,7 +171,15 @@ def convnext(
     outputs = x
     inputs = utils.layer_utils.get_source_inputs(input_tensor)[0]
 
-    return keras.Model(inputs, outputs, name=model_name)
+    model = keras.Model(inputs, outputs, name=model_name)
+    if weights is not None:
+        key = f'{model_name}_{input_shape[0]}'
+        url = weights_1k[key] if weights == 'imagenet_1k' else weights_22k[key]
+        pretrained_weights = keras.utils.get_file(origin=url)
+        model.load_weights(pretrained_weights)
+
+    return model
+
 
 def convnext_atto(**kwargs):
     model = convnext(depths=[2, 2, 6, 2], dims=[40, 80, 160, 320], model_name='convnext_atto', **kwargs)
