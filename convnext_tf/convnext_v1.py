@@ -151,7 +151,7 @@ def convnext(
         input_tensor = keras.Input(input_shape)
 
     x = input_tensor
-    dp_rates = [x for x in np.linspace(0, drop_path_rate, sum(depths))]
+    dp_rates = [dp for dp in np.linspace(0, drop_path_rate, sum(depths))]
 
     current = 0
     for i in range(4):
