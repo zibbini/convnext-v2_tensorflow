@@ -18,7 +18,7 @@ Weights are currently available for ConvNeXt V1 official configurations, but Con
 For installation of tensorflow and keras, please refer to the following [guide](https://www.tensorflow.org/install). Once TensorFlow is installed, you can make use of the models like so:
 
 ``` py
-# Contruct 'tiny' model with standard ImageNet resolution
+# Construct 'tiny' model with standard ImageNet resolution
 from convnext_tf import convnext_v1
 
 model = convnext_v1.convnext_tiny(input_shape=(224, 224, 3))
@@ -36,7 +36,7 @@ model = keras.Model(inputs, cxn_tiny.output)
 ```
 
 ``` py
-# Contruct 'tiny' model with custom resolution
+# Construct 'tiny' model with custom resolution
 from convnext_tf import convnext_v1
 
 model = convnext_v1.convnext_tiny(input_shape=(512, 512, 3))
@@ -46,8 +46,10 @@ model = convnext_v1.convnext_tiny(input_shape=(512, 512, 3))
 # Use imagenet weights to load model
 from convnext_tf import convnext_v1
 
-model = convnext_v1.convnext_tiny(weights='imagenet_1k') # Load weights trained on ImageNet-1k dataset
-model = convnext_v1.convnext_tiny(weights='imagenet_22k') # Load weights trained on ImageNet-22k dataset and fine-tuned on ImageNet-1k dataset
+# Load weights trained on ImageNet-1k dataset
+model = convnext_v1.convnext_tiny(weights='imagenet_1k') 
+# Load weights trained on ImageNet-22k dataset and fine-tuned on ImageNet-1k dataset
+model = convnext_v1.convnext_tiny(weights='imagenet_22k') 
 ```
 
 ``` py
