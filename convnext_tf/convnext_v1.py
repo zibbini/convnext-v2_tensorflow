@@ -33,13 +33,13 @@ class DropPath(layers.Layer):
 
 
 class LayerScale(layers.Layer):
-    def __init__(self, dim, init_value=1e-6, **kwargs):
+    def __init__(self, dim, init_value=1e-6, name='layer_scale', **kwargs):
         super().__init__(**kwargs)
         self.gamma = tf.Variable(
             initial_value=init_value * tf.ones((dim), dtype=self.compute_dtype),
             trainable=True,
-            dtype=self.compute_dtype,
-            name='layer_scale/gamma') if init_value > 0 else None
+            name=f'{name}/gamma',
+            dtype=self.compute_dtype) if init_value > 0 else None
 
     def call(self, x):
         if self.gamma is not None:
@@ -79,7 +79,7 @@ class Block(keras.Model):
         self.pwconv1 = layers.Dense(4 * dim)
         self.act = layers.Activation('gelu')
         self.pwconv2 = layers.Dense(dim)
-        self.layer_scale = LayerScale(dim, layer_scale_init_value)
+        self.layer_scale = LayerScale(dim, layer_scale_init_value, name=f"{kwargs['name']}_layer_scale")
         self.drop_path = DropPath(drop_path)
 
     def call(self, x):
