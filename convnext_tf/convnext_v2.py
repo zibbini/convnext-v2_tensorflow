@@ -8,25 +8,26 @@ from .convnext_v1 import DropPath, DownSample, Stem, Head
 
 
 class GRN(layers.Layer):
-    def __init__(self, dim, **kwargs):
+    def __init__(self, dim, name='grn', **kwargs):
         super().__init__(**kwargs)
         self.gamma = tf.Variable(
             initial_value=tf.zeros((1, 1, 1, dim), dtype=self.compute_dtype),
             trainable=True,
             dtype=self.compute_dtype,
-            name='GRN/gamma'
+            name=f'{name}/gamma'
         )
         self.beta = tf.Variable(
             initial_value=tf.zeros((1, 1, 1, dim), dtype=self.compute_dtype),
             trainable=True,
             dtype=self.compute_dtype,
-            name='GRN/beta'
+            name=f'{name}/beta'
         )
 
     def call(self, x):
         Gx = tf.norm(x, ord=2, axis=(1,2), keepdims=True)
         Nx = Gx / (tf.math.reduce_mean(Gx, axis=-1, keepdims=True) + 1e-6)
         return self.gamma * (x * Nx) + self.beta + x
+
 
 class Block(keras.Model):
     def __init__(self, dim, drop_path=0., **kwargs):
@@ -35,7 +36,7 @@ class Block(keras.Model):
         self.norm = layers.LayerNormalization(epsilon=1e-6)
         self.pwconv1 = layers.Dense(4 * dim)
         self.act = layers.Activation('gelu')
-        self.grn = GRN(4 * dim)
+        self.grn = GRN(4 * dim, name=f"{kwargs['name']}_grn")
         self.pwconv2 = layers.Dense(dim)
         self.drop_path = DropPath(drop_path)
 
