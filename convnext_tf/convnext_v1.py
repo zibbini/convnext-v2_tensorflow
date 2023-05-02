@@ -62,7 +62,7 @@ class DownSample(keras.Model):
 class Stem(keras.Model):
     def __init__(self, dim):
         super().__init__()
-        self.conv = layers.Conv2D(dim, kernel_size=4, strides=4, padding='same')
+        self.conv = layers.Conv2D(dim, kernel_size=4, strides=4, padding='valid')
         self.norm = layers.LayerNormalization(epsilon=1e-6)
 
     def call(self, x):
@@ -96,11 +96,11 @@ class Block(keras.Model):
 
 
 class Head(keras.Model):
-    def __init__(self, num_classes):
+    def __init__(self, num_classes, classifier_activation):
         super().__init__()
         self.avg_pool = layers.GlobalAveragePooling2D()
         self.norm = layers.LayerNormalization()
-        self.predictions = layers.Dense(num_classes)
+        self.predictions = layers.Dense(num_classes, activation=classifier_activation)
 
     def call(self, x):
         x = self.avg_pool(x)
@@ -141,6 +141,7 @@ def convnext(
     drop_path_rate=0., 
     head_init_scale=1,
     include_top=True,
+    classifier_activation='softmax',
     weights=None,
     model_name=None):
     
@@ -166,7 +167,7 @@ def convnext(
         current += depths[i]
 
     if include_top:
-        x = Head(num_classes)(x)
+        x = Head(num_classes, classifier_activation)(x)
 
     outputs = x
     inputs = utils.layer_utils.get_source_inputs(input_tensor)[0]
