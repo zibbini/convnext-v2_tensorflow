@@ -11,7 +11,7 @@ This repo contains unofficial implementations of both versions of ConvNeXt model
 - Are capable of mixed precision use
 - Include model configurations (`atto`, `femto`, `pico`, `nano`) for ConvNeXt-V1 matching those found in the official [pytorch-image-models](https://github.com/huggingface/pytorch-image-models) library. 
 
-Weights are currently available for ConvNeXt V1 official configurations, but ConvNeXt V2 weights are still yet to be processed. The `atto`, `femto`, `pico` and `nano` configurations of ConvNeXt V1 are also in processing. 
+Weights are currently available for ConvNeXt V1 official configurations, but ConvNeXt V2 weights are still yet to be processed.
 
 ### Usage
 
