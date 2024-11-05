@@ -96,11 +96,11 @@ class Block(keras.Model):
 
 
 class Head(keras.Model):
-    def __init__(self, num_classes, classifier_activation):
+    def __init__(self, num_classes):
         super().__init__()
         self.avg_pool = layers.GlobalAveragePooling2D()
         self.norm = layers.LayerNormalization()
-        self.predictions = layers.Dense(num_classes, activation=classifier_activation)
+        self.predictions = layers.Dense(num_classes)
 
     def call(self, x):
         x = self.avg_pool(x)
@@ -141,7 +141,6 @@ def convnext(
     drop_path_rate=0., 
     head_init_scale=1,
     include_top=True,
-    classifier_activation='softmax',
     weights=None,
     model_name=None):
     
@@ -167,7 +166,7 @@ def convnext(
         current += depths[i]
 
     if include_top:
-        x = Head(num_classes, classifier_activation)(x)
+        x = Head(num_classes)(x)
 
     outputs = x
     inputs = utils.layer_utils.get_source_inputs(input_tensor)[0]
