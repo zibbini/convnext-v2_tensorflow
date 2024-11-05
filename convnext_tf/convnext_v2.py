@@ -26,8 +26,7 @@ class GRN(layers.Layer):
     def call(self, x):
         Gx = tf.norm(x, ord='fro', axis=(1,2), keepdims=True)
         Nx = Gx / (tf.math.reduce_mean(Gx, axis=-1, keepdims=True) + 1e-6)
-        return ((self.gamma * (x * Nx)) + self.beta) + x
-
+        return (self.gamma * (x * Nx)) + self.beta + x
 
 class Block(keras.Model):
     def __init__(self, dim, drop_path=0., **kwargs):
@@ -62,7 +61,6 @@ def convnext_v2(
     drop_path_rate=0., 
     head_init_scale=1,
     include_top=True,
-    classifier_activation='softmax',
     weights=None,
     model_name=None):
     
@@ -88,7 +86,7 @@ def convnext_v2(
         current += depths[i]
 
     if include_top:
-        x = Head(num_classes, classifier_activation)(x)
+        x = Head(num_classes)(x)
 
     outputs = x
     inputs = utils.layer_utils.get_source_inputs(input_tensor)[0]
