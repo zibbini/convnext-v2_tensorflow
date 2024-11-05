@@ -33,13 +33,13 @@ class DropPath(layers.Layer):
 
 
 class LayerScale(layers.Layer):
-    def __init__(self, dim, init_value=1e-6, **kwargs):
+    def __init__(self, dim, init_value=1e-6, name='layer_scale', **kwargs):
         super().__init__(**kwargs)
         self.gamma = tf.Variable(
             initial_value=init_value * tf.ones((dim), dtype=self.compute_dtype),
             trainable=True,
-            dtype=self.compute_dtype,
-            name='layer_scale/gamma') if init_value > 0 else None
+            name=f'{name}/gamma',
+            dtype=self.compute_dtype) if init_value > 0 else None
 
     def call(self, x):
         if self.gamma is not None:
@@ -62,7 +62,7 @@ class DownSample(keras.Model):
 class Stem(keras.Model):
     def __init__(self, dim):
         super().__init__()
-        self.conv = layers.Conv2D(dim, kernel_size=4, strides=4, padding='same')
+        self.conv = layers.Conv2D(dim, kernel_size=4, strides=4, padding='valid')
         self.norm = layers.LayerNormalization(epsilon=1e-6)
 
     def call(self, x):
@@ -79,7 +79,7 @@ class Block(keras.Model):
         self.pwconv1 = layers.Dense(4 * dim)
         self.act = layers.Activation('gelu')
         self.pwconv2 = layers.Dense(dim)
-        self.layer_scale = LayerScale(dim, layer_scale_init_value)
+        self.layer_scale = LayerScale(dim, layer_scale_init_value, name=f"{kwargs['name']}_layer_scale")
         self.drop_path = DropPath(drop_path)
 
     def call(self, x):
@@ -96,11 +96,11 @@ class Block(keras.Model):
 
 
 class Head(keras.Model):
-    def __init__(self, num_classes):
+    def __init__(self, num_classes, classifier_activation):
         super().__init__()
         self.avg_pool = layers.GlobalAveragePooling2D()
         self.norm = layers.LayerNormalization()
-        self.predictions = layers.Dense(num_classes)
+        self.predictions = layers.Dense(num_classes, activation=classifier_activation)
 
     def call(self, x):
         x = self.avg_pool(x)
@@ -141,6 +141,7 @@ def convnext(
     drop_path_rate=0., 
     head_init_scale=1,
     include_top=True,
+    classifier_activation='softmax',
     weights=None,
     model_name=None):
     
@@ -151,7 +152,7 @@ def convnext(
         input_tensor = keras.Input(input_shape)
 
     x = input_tensor
-    dp_rates = [x for x in np.linspace(0, drop_path_rate, sum(depths))]
+    dp_rates = [dp for dp in np.linspace(0, drop_path_rate, sum(depths))]
 
     current = 0
     for i in range(4):
@@ -166,7 +167,7 @@ def convnext(
         current += depths[i]
 
     if include_top:
-        x = Head(num_classes)(x)
+        x = Head(num_classes, classifier_activation)(x)
 
     outputs = x
     inputs = utils.layer_utils.get_source_inputs(input_tensor)[0]
