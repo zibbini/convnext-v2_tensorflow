@@ -169,7 +169,7 @@ def main():
                                     model_states[f'{stage_prefix}.pwconv1.bias'].detach().numpy()
                                 )
                             )
-                        elif j == 4:
+                        elif j == 5:
                             layer.kernel.assign(
                                 tf.Variable(
                                     model_states[f'{stage_prefix}.pwconv2.weight']
